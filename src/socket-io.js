@@ -1,6 +1,6 @@
 const SocketIOServer = (socket, io, db) => {
   console.log('An user connected');
-  socket.emit('emit', db.data.products);
+  socket.emit('emit', db.data.XeTrongXuong);
   
   socket.on('login', (msg) => {
     console.log('login',msg.name);
