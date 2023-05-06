@@ -20,14 +20,16 @@
 
         var socket = io('http://localhost:8000');
         var logtoken
+        
         socket.on('login', function (messages) {
             document.getElementById('text').innerHTML = messages
             console.log(messages);
         });
-        socket.on('emit', function (messages) {
 
+        socket.on('emit', function (messages) {
             console.log('datasocket',messages);
         });
+
         socket.emit('login', { name: "Trực", message: "message" });
 
        async function loggin(params) {
