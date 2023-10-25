@@ -34,7 +34,7 @@ const io = new Server(server, {
   cors: { origin: '*' },
 });
 io.on('connection', (socket) => {
-  socketHandler(socket, io,db);
+  socketHandler(socket, io, db);
 });
 
 // Config proxy middlewares
@@ -94,11 +94,7 @@ app.post('/refresh-token', (req, res) => {
   refreshTokenHandler(req, res);
 });
 
-// Upload 1 file
-app.post('/upload-file', uploadFileHandler);
 
-// Upload multiple files
-app.post('/upload-files', uploadFilesHandler);
 
 // Access control
 app.use((req, res, next) => {

@@ -32,10 +32,10 @@ export const testHandler = (db, req, res) => {
 export const loginHandler = (db, req, res) => {
   const { username, email, password: pwd } = req.body;
 
-  const user = db.data.users?.find(
+  const user = db.data.Users?.find(
     (u) => (u.username === username || u.email === email) && u.password === pwd
   );
-
+console.log(user,req.bod);
   if (user && user.password === pwd) {
     const accessToken = generateAccessToken(user);
     const refreshToken = generateRefreshToken(user);
