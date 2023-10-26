@@ -12,10 +12,8 @@ const handleUploadFile = async (req, file) => {
   try {
     // Copy file from temp folder to uploads folder (not rename to allow cross-device link)
     await copyFile(file.filepath, `./public/${uploadFolder}/${file.originalFilename}`);
-
     // Remove temp file
     await unlink(file.filepath);
-
     // Return new path of uploaded file
     file.filepath = `${req.protocol}://${req.get('host')}/${uploadFolder}/${file.name}`;
 
@@ -35,7 +33,7 @@ export const loginHandler = (db, req, res) => {
   const user = db.data.Users?.find(
     (u) => (u.username === username || u.email === email) && u.password === pwd
   );
-console.log(user,req.bod);
+
   if (user && user.password === pwd) {
     const accessToken = generateAccessToken(user);
     const refreshToken = generateRefreshToken(user);
@@ -47,7 +45,7 @@ console.log(user,req.bod);
       refreshToken,
     });
   } else {
-    res.status(400).jsonp({ message: 'Username or password is incorrect!' });
+    res.status(400).jsonp({ message: 'Tên đăng nhập hoặc mật khẩu không đúng!' });
   }
 };
 
@@ -74,7 +72,7 @@ export const refreshTokenHandler = (req, res) => {
 
 export const registerHandler = (db, req, res) => {
   const { username, email, password } = req.body;
-  const users = db.data.users;
+  const users = db.data.Users;
 
   if (!password && (!email || !username)) {
     res.status(400).jsonp({ message: 'Please input all required fields!' });
@@ -109,77 +107,10 @@ export const registerHandler = (db, req, res) => {
 
   users?.push(newUser);
   db.write();
-
   res.jsonp(newUser);
 };
 
-export const uploadFileHandler = (req, res) => {
-  if (req.headers['content-type'] === 'application/json') {
-    res.status(400).jsonp({ message: 'Content-Type "application/json" is not allowed.' });
-    return;
-  }
 
-  const form = formidable();
-
-  form.parse(req, async (error, fields, files) => {
-    let file = files.file;
-
-    if (error || !file) {
-      res.status(400).jsonp({ message: 'Missing "file" field.' });
-      return;
-    }
-
-    try {
-      file = await handleUploadFile(req, file);
-      res.jsonp(file);
-    } catch (err) {
-      console.log(err);
-      res.status(500).jsonp({ message: 'Cannot upload file.' });
-    }
-  });
-};
-
-export const uploadFilesHandler = (req, res) => {
-  if (req.headers['content-type'] === 'application/json') {
-    res.status(400).jsonp({ message: 'Content-Type "application/json" is not allowed.' });
-    return;
-  }
-
-  const form = formidable({ multiples: true });
-
-  form.parse(req, async (error, fields, files) => {
-    let filesUploaded = files.files;
-
-    if (error || !filesUploaded) {
-      res.status(400).jsonp({ message: 'Missing "files" field.' });
-      return;
-    }
-
-    // If user upload 1 file, transform data to array
-    if (!Array.isArray(filesUploaded)) {
-      filesUploaded = [filesUploaded];
-    }
-
-    try {
-      // Handle all uploaded files
-      filesUploaded = await Promise.all(
-        filesUploaded.map(async (file) => {
-          try {
-            file = await handleUploadFile(req, file);
-            return file;
-          } catch (err) {
-            throw err;
-          }
-        })
-      );
-
-      res.jsonp(filesUploaded);
-    } catch (err) {
-      console.log(err);
-      res.status(500).jsonp({ message: 'Cannot upload files.' });
-    }
-  });
-};
 
 export const socketEmit = (io, req, res) => {
   io.emit('socket-emit', req.body);

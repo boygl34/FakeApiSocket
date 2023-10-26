@@ -5,21 +5,17 @@ import { Low } from 'lowdb';
 import { JSONFile } from 'lowdb/node';
 import { Server } from 'socket.io';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-
 import { CONFIG } from './config.js';
-import { isAuthenticated } from './utils/jwt-authenticate.js';
+import { isAuthenticated, AuthenticateSocket } from './utils/jwt-authenticate.js';
 import { schema, setupRootValue } from './src/graphql.js';
 import {
   loginHandler,
   registerHandler,
   refreshTokenHandler,
   socketEmit,
-  testHandler,
-  uploadFileHandler,
-  uploadFilesHandler,
+  testHandler
 } from './src/rest.js';
 import socketHandler from './src/socket-io.js';
-
 const db = new Low(new JSONFile(CONFIG.databaseFile));
 await db.read();
 
@@ -33,7 +29,9 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: { origin: '*' },
 });
-io.on('connection', (socket) => {
+let socket
+io.use(AuthenticateSocket).on('connection', (socket) => {
+  socket = socket
   socketHandler(socket, io, db);
 });
 
@@ -57,16 +55,17 @@ app.use(jsonServer.bodyParser);
 
 // Save createdAt and updatedAt automatically
 app.use((req, res, next) => {
-  const currentTime = Date.now();
-
-  if (req.method === 'POST') {
-    req.body.createdAt = currentTime;
-    req.body.modifiedAt = currentTime;
-  } else if (['PUT', 'PATCH'].includes(req.method)) {
-    req.body.modifiedAt = currentTime;
+  if (['PUT', 'PATCH', 'POST', 'DELETE'].includes(req.method)) {
+    if (req.url.indexOf('/XuatKho') >= 0) {
+      io.to("Phòng PT").emit("Lấy Dữ Liệu Xuất Kho")
+    }
+    if (req.url.indexOf('/TrongXuong') >= 0) {
+      io.to("Vip").emit("Lấy Dữ Liệu")
+      io.to(req.body.CoVanDichVu).emit("Lấy Dữ Liệu")
+    }
   }
-
   next();
+
 });
 
 // Test web socket request

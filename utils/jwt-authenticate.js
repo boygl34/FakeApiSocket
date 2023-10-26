@@ -3,9 +3,9 @@ import { CONFIG } from '../config.js';
 
 export const generateAccessToken = (user) => {
   return jwt.sign(
-    { sub: user.id, name: user.firstName + ' ' + user.lastName, avatar: user.avatar },
-    CONFIG.accessTokenSecret,
-    {
+   { fullName: user.fullName, Job: user.Job, id: new Date().valueOf() },
+      CONFIG.accessTokenSecret,
+      {
       expiresIn: CONFIG.accessTokenExpiresInMinutes + 'm',
     }
   );
@@ -26,12 +26,34 @@ export const isAuthenticated = (req) => {
   if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
     token = req.headers.authorization.split(' ')[1];
   }
-
   try {
+   
     jwt.verify(token, CONFIG.accessTokenSecret);
   } catch (err) {
     return false;
   }
-
   return true;
 };
+
+ export const AuthenticateSocket = (socket, next) => {
+  const token = socket.handshake.auth.token;
+  if (!token) {
+    return next(new Error("Authentication error: Token not provided."));
+  }
+
+  const user = verifyToken(token);
+  if (!user) {
+    return next(new Error("Authentication error: Invalid token."));
+  }
+  socket.user = user;
+  next();
+};
+ const verifyToken = (token) => {
+    try {
+      return jwt.verify(token, CONFIG.accessTokenSecret);
+    } catch (error) {
+      return null;
+    }
+  };
+
+ 

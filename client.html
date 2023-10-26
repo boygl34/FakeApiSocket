@@ -17,44 +17,43 @@
     <button onclick="loggin()">save</button>
     <button onclick="getdada()">getdata</button>
     <script>
-
-        var socket = io('http://localhost:8000');
+        const ServerUrl = 'http://localhost:8000'
+        let socket = null
         var logtoken
-        
+
         socket.on('login', function (messages) {
             document.getElementById('text').innerHTML = messages
             console.log(messages);
         });
 
         socket.on('emit', function (messages) {
-            console.log('datasocket',messages);
+            console.log('datasocket', messages);
         });
 
         socket.emit('login', { name: "Trực", message: "message" });
 
-       async function loggin(params) {
-            let rep ={
+        async function loggin(params) {
+            let rep = {
                 "username": "Võ Chính Trực",
                 "password": "TVT@12347"
             }
             var res = await axios.post('http://localhost:8000/login', rep)
-            logtoken= res.data
+            logtoken = res.data
             console.log(res.data);
+            socket = io(ServerUrl, { auth: { token: res.data.accessToken }, timeout: 20000 })
+
         }
         async function getdada(params) {
-           console.log(logtoken.accessToken); 
-           const config = {
-    headers: { Authorization: `Bearer ${logtoken.accessToken}` }
-};
-            let rep ={
-      "name": "Trực test post",
-      "price": 353,
-      "quantity": 40,
-      "thumbnail": "http://dummyimage.com/203x100.png/ff4444/ffffff",
-      "status": false,
-
+            console.log(logtoken.accessToken);
+            const config = {
+                headers: { Authorization: `Bearer ${logtoken.accessToken}` }
+            };
+            let rep = {
+                "id": 1694061626159,
+                "BienSoXe": "72A-107.06",
+                "CoVanDichVu": "Phạm Quốc Vinh",
             }
-            var res = await axios.post('http://localhost:8000/products', rep,config)
+            var res = await axios.post('http://localhost:8000/TrongXuong', rep, config)
             console.log(res.data);
         }
     </script>

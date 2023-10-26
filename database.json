@@ -1,21 +1,32 @@
 {
   "protectedResources": {
     "Users": [
-       "GET",
+      "GET",
       "POST",
       "PUT",
       "PATCH",
       "DELETE"
     ],
     "TrongXuong": [
-      "GET",
+      "POST",
+      "PUT",
+      "PATCH",
+      "DELETE"
+    ],
+    "GiaoXe": [
+      "POST",
+      "PUT",
+      "PATCH",
+      "DELETE"
+    ],
+    "XuatKho": [
       "POST",
       "PUT",
       "PATCH",
       "DELETE"
     ]
   },
-  
+  "XuatKho": [],
   "Users": [
     {
       "id": 1,
@@ -1946,12 +1957,14 @@
       "KhachDoi": null,
       "RuaXe": false,
       "KieuXe": null,
-      "LoaiHinhSuaChua": [],
-      "TrangThaiXuong": "Có Hẹn",
-      "TrangThaiHen": "Đã Xác Nhận",
+      "LoaiHinhSuaChua": [
+        "Đồng Sơn"
+      ],
+      "TrangThaiXuong": "Chờ Tiếp Nhận",
+      "TrangThaiHen": "Trễ Hẹn",
       "ThoiDiemDatHen": "2023-10-14 14:00",
-      "ThoiDiemVaoDaiLy": null,
-      "ThoiDiemGapLeTan": null,
+      "ThoiDiemVaoDaiLy": "2023-10-26 15:46",
+      "ThoiDiemGapLeTan": "2023-10-26 15:46",
       "ThoiDiemHuyTiepNhan": null,
       "ThoiDiemBatDauTiepKhach": null,
       "ThoiDiemKetThucTiepKhach": null,
@@ -1965,7 +1978,7 @@
       "NgayHenGiaoXe": null,
       "NoiDungCuocHen": "BẢO HÀNH THAY ỐNG XẢ",
       "KhuVucKhachHang": "Vũng Tàu",
-      "SoThe": null,
+      "SoThe": "1",
       "UuTien": [],
       "GhiChu": null,
       "TrangThaiGJ": null,
@@ -1976,7 +1989,8 @@
       "NhanVienHuyHen": null,
       "ThoiDiemHuyHen": null,
       "NgayDangKiem": null,
-      "NgayDatHen": "2023-10-14 11:04:45"
+      "NgayDatHen": "2023-10-14 11:04:45",
+      "BP2": {}
     },
     {
       "id": 1697266647557,
@@ -5130,7 +5144,7 @@
         "Bảo Dưỡng"
       ],
       "TrangThaiXuong": "Đang Tiếp Nhận",
-      "TrangThaiHen": "Đúng Hẹn",
+      "TrangThaiHen": "Trễ Hẹn",
       "ThoiDiemDatHen": "2023-10-25 15:00",
       "ThoiDiemVaoDaiLy": "2023-10-25 15:07",
       "ThoiDiemGapLeTan": "2023-10-25 15:07",
@@ -7944,7 +7958,7 @@
       "ThoiDiemKetThucRuaXe": null,
       "ThoiDiemGiaoXe": null,
       "NgayHenGiaoXe": null,
-      "NoiDungCuocHen": "BD CẤP NHỎ + KIỂM TRA XE LẠNH YẾU",
+      "NoiDungCuocHen": "BD CẤP NHỎ + KIỂM TRA XE LẠNH YẾU hơn",
       "KhuVucKhachHang": "Vũng Tàu",
       "SoThe": null,
       "UuTien": [],
@@ -8151,57 +8165,6 @@
       "NhanVienHuyHen": null,
       "ThoiDiemHuyHen": null,
       "NgayDangKiem": null
-    },
-    {
-      "id": 1698196167646,
-      "BienSoXe": "72A-249.81",
-      "CoVanDichVu": "Lê Chí Tâm",
-      "NgayDangKyHen": null,
-      "GJ": [],
-      "RO": [],
-      "BP": [],
-      "BP2": {},
-      "TenKhachHang": "TRƯƠNG ĐỨC TRUNG ",
-      "GroupHen": "Đồng Sơn",
-      "SoDienThoai": "0917355379",
-      "NhanVienDatHen": "Lê Chí Tâm",
-      "LoaiHinhHen": [
-        "Đồng Sơn"
-      ],
-      "KhachDoi": null,
-      "RuaXe": false,
-      "KieuXe": null,
-      "LoaiHinhSuaChua": [],
-      "TrangThaiXuong": "Có Hẹn",
-      "TrangThaiHen": "Đã Xác Nhận",
-      "ThoiDiemDatHen": "2023-10-26 09:00",
-      "ThoiDiemVaoDaiLy": null,
-      "ThoiDiemGapLeTan": null,
-      "ThoiDiemHuyTiepNhan": null,
-      "ThoiDiemBatDauTiepKhach": null,
-      "ThoiDiemKetThucTiepKhach": null,
-      "ThoiDiemBatDauSCC": null,
-      "ThoiDiemKetThucSCC": null,
-      "ThoiDiemBatDauBP": null,
-      "ThoiDiemKetThucBP": null,
-      "ThoiDiemBatDauRuaXe": null,
-      "ThoiDiemKetThucRuaXe": null,
-      "ThoiDiemGiaoXe": null,
-      "NgayHenGiaoXe": null,
-      "NoiDungCuocHen": "THAY ỐP CẢN TRƯỚC",
-      "KhuVucKhachHang": "Vũng Tàu",
-      "SoThe": null,
-      "UuTien": [],
-      "GhiChu": null,
-      "TrangThaiGJ": null,
-      "TrangThaiBP": null,
-      "NhomSon": null,
-      "KTVDong": [],
-      "KTVSon": [],
-      "NhanVienHuyHen": null,
-      "ThoiDiemHuyHen": null,
-      "NgayDangKiem": null,
-      "NgayDatHen": "2023-10-25 08:10:11"
     },
     {
       "id": 1698196584669,
@@ -10823,8 +10786,8 @@
       "LoaiHinhSuaChua": [
         "Sửa Chữa Chung"
       ],
-      "TrangThaiXuong": "Đang Tiếp Nhận",
-      "TrangThaiHen": "Đúng Hẹn",
+      "TrangThaiXuong": "Chuẩn Bị Tiếp",
+      "TrangThaiHen": "Trễ Hẹn",
       "ThoiDiemDatHen": "2023-10-25 15:00",
       "ThoiDiemVaoDaiLy": "2023-10-25 14:47",
       "ThoiDiemGapLeTan": "2023-10-25 14:47",
@@ -11278,7 +11241,7 @@
       "LoaiHinhSuaChua": [],
       "TrangThaiXuong": "Có Hẹn",
       "TrangThaiHen": "Đã Xác Nhận",
-      "ThoiDiemDatHen": "2023-10-26 08:00",
+      "ThoiDiemDatHen": "2023-10-26 08:30",
       "ThoiDiemVaoDaiLy": null,
       "ThoiDiemGapLeTan": null,
       "ThoiDiemHuyTiepNhan": null,
@@ -11307,6 +11270,57 @@
       "NgayDangKiem": null,
       "NgayDatHen": "2023-10-25 16:49:39"
     }
+  ],
+  "GiaoXe": [
+    {
+      "id": 1698196167646,
+      "BienSoXe": "72A-249.81",
+      "CoVanDichVu": "Lê Chí Tâm",
+      "NgayDangKyHen": null,
+      "GJ": [],
+      "RO": [],
+      "BP": [],
+      "BP2": {},
+      "TenKhachHang": "TRƯƠNG ĐỨC TRUNG ",
+      "GroupHen": "Đồng Sơn",
+      "SoDienThoai": "0917355379",
+      "NhanVienDatHen": "Lê Chí Tâm",
+      "LoaiHinhHen": [
+        "Đồng Sơn"
+      ],
+      "KhachDoi": null,
+      "RuaXe": false,
+      "KieuXe": null,
+      "LoaiHinhSuaChua": [],
+      "TrangThaiXuong": "Có Hẹn",
+      "TrangThaiHen": "Hủy Hẹn",
+      "ThoiDiemDatHen": "2023-10-26 10:00",
+      "ThoiDiemVaoDaiLy": null,
+      "ThoiDiemGapLeTan": null,
+      "ThoiDiemHuyTiepNhan": null,
+      "ThoiDiemBatDauTiepKhach": null,
+      "ThoiDiemKetThucTiepKhach": null,
+      "ThoiDiemBatDauSCC": null,
+      "ThoiDiemKetThucSCC": null,
+      "ThoiDiemBatDauBP": null,
+      "ThoiDiemKetThucBP": null,
+      "ThoiDiemBatDauRuaXe": null,
+      "ThoiDiemKetThucRuaXe": null,
+      "ThoiDiemGiaoXe": null,
+      "NgayHenGiaoXe": null,
+      "NoiDungCuocHen": "THAY ỐP CẢN TRƯỚC",
+      "KhuVucKhachHang": "Vũng Tàu",
+      "SoThe": null,
+      "UuTien": [],
+      "GhiChu": null,
+      "TrangThaiGJ": null,
+      "TrangThaiBP": null,
+      "NhomSon": null,
+      "KTVDong": [],
+      "KTVSon": [],
+      "NhanVienHuyHen": "Võ Chính Trực",
+      "ThoiDiemHuyHen": "2023-10-26 14:11:24",
+      "NgayDangKiem": null
+    }
   ]
-
 }
